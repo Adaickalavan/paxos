@@ -24,19 +24,19 @@ func Test_main(t *testing.T) {
 		args    []string
 		wantBuf []byte
 	}{
-		{name: "Maximum price matches achievable price",
+		{name: "Maximum price matches achievable price. Select 2 items.",
 			args:    []string{"cmd", "prices.txt", "2500", "2"},
 			wantBuf: string2Bytes("Candy Bar 500, Earmuffs 2000"),
 		},
-		{name: "Maximum price higher than achievable price",
+		{name: "Maximum price higher than achievable price. Select 2 items.",
 			args:    []string{"cmd", "prices.txt", "2300", "2"},
 			wantBuf: string2Bytes("Paperback Book 700, Headphones 1400"),
 		},
-		{name: "Maximum price higher than highest priced item",
+		{name: "Maximum price higher than highest priced item. Select 2 items.",
 			args:    []string{"cmd", "prices.txt", "10000","2"},
 			wantBuf: string2Bytes("Earmuffs 2000, Bluetooth Stereo 6000"),
 		},
-		{name: "Maximum price lower than achievable price",
+		{name: "Maximum price lower than achievable price. Select 2 items.",
 			args:    []string{"cmd", "prices.txt", "1100", "2"},
 			wantBuf: string2Bytes("Not possible"),
 		},

@@ -4,28 +4,24 @@
   
 1. **Executable**
     + To create an executable in the `$GOPATH/bin/` directory, execute
-        ```
-        go install parking_lot
+        ```go
+        go install FindItems
         ```
 2. **Unit test and functional test**
     + To run complete test suite, run
-        ```
+        ```go
         go test -v FindItems
         ```
         Here, `-v` is the verbose command flag.
     + To run specific test, run
-        ```
+        ```go
         go test -v FindItems -run xxx
         ```
         Here, `xxx` is the name of test function.
-    + Test coverage: 94.1% of statements
+    + Test coverage: 88.9% of statements
 3. **Running**
-    + Launch interactive user input mode by executing
-        ```
-        $GOPATH/bin/parking_lot
-        ```
     + Launch file input mode by executing
-        ```
+        ```go
         $GOPATH/bin/parking_lot.exe $GOPATH/src/parking_lot/inputFile.txt
         ```
         Here, `$GOPATH/src/parking_lot/inputFile.txt` refers to the input file with complete path.
@@ -45,7 +41,7 @@ FindItems             # main folder
 ## Notes on solution
 
 1. **Assumptions**
-   + Assumptions made: All items have integer prices > 0 cents. In other words, no item is free.
+   + All items have integer prices > 0 cents. In other words, no item is free.
 
 2. **Complexity**
     + O(itemNum * maxPrice * maxItems).

@@ -27,7 +27,7 @@ func main() {
 
 	// Read command line arguments
 	args := len(os.Args)
-	if args > 4 || args < 2 {
+	if args > 4 || args < 3 {
 		log.Fatal("Unknown command line input. ", err)
 	}
 	maxPrice, err := strconv.Atoi(os.Args[2])
@@ -112,10 +112,9 @@ func getItems(scanner *bufio.Scanner, maxPrice int, maxItems int) ([]item, []int
 					prevPath := pathArray1[price][itemCount]
 					subPath := pathArray1[price-itemPrice][itemCount-1]
 					newTot := itemPrice + subPath.total
-					switch {
-					case newTot > prevPath.total:
+					if newTot > prevPath.total {
 						pathArray2[price][itemCount] = path{total: newTot, itemPicked: itemIndex}
-					default:
+					} else {
 						pathArray2[price][itemCount] = pathArray1[price][itemCount]
 					}
 				} else {
@@ -126,10 +125,6 @@ func getItems(scanner *bufio.Scanner, maxPrice int, maxItems int) ([]item, []int
 
 		// Swap the arrays
 		pathArray1, pathArray2 = pathArray2, pathArray1
-
-		// fmt.Println(pathArray1)
-		// fmt.Printf("Input: %s \n", input)
-		// fmt.Println("------------------------")
 	}
 
 	// Backtrack to get chosen items' indices
@@ -154,11 +149,11 @@ func parse(input string) []string {
 
 // backtrack returns indices of selected items from itemList. Number of selected items equals maxItems.
 // Error is returned if no combination exists.
-func backtrack(itemList []item, priceArray [][]path, maxItems int) ([]int, error) {
-	col := len(priceArray) - 1
+func backtrack(itemList []item, pathArray [][]path, maxItems int) ([]int, error) {
+	col := len(pathArray) - 1
 	var indices []int
 	for itemCount := maxItems; itemCount > 0; itemCount-- {
-		curPath := priceArray[col][itemCount]
+		curPath := pathArray[col][itemCount]
 		indices = append(indices, curPath.itemPicked)
 		if col <= 0 {
 			return indices, errors.New("Not possible")
