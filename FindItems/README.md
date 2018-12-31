@@ -1,13 +1,17 @@
 # Find Items
 
 ## Instructions
-  
-1. **Executable**
-    + To create an executable in the `$GOPATH/bin/` directory, execute
+
+1. **Source code**
+    + Unzip `paxos.zip` into `$GOPATH/src/paxos` folder in your computer
+
+2. **Executable**
+    + To create an executable, navigate to `$GOPATH/src/paxos/FindItems` directory and execute
         ```go
         go install FindItems
         ```
-2. **Unit test and functional test**
+
+3. **Functional test**
     + To run complete test suite, run
         ```go
         go test -v FindItems
@@ -19,12 +23,26 @@
         ```
         Here, `xxx` is the name of test function.
     + Test coverage: 88.9% of statements
-3. **Running**
-    + Launch file input mode by executing
+
+4. **Running**
+    + Launch by executing
         ```go
-        $GOPATH/bin/parking_lot.exe $GOPATH/src/parking_lot/inputFile.txt
+        $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt maxPrice maxItems
         ```
-        Here, `$GOPATH/src/parking_lot/inputFile.txt` refers to the input file with complete path.
+        Here,
+        + `$GOPATH/src/paxos/FindItems/prices.txt` refers to the input file with complete path
+        + `maxPrice` refers to the balance in the gift card
+        + `maxItems` refers to the desired number of items to be selected
+    + Several example commands
+        ```go
+        $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt 2300 //When maxItems is omitted, it defaults to 2
+        ```
+        ```go
+        $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt 2100 2
+        ```
+        ```go
+        $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt 2200 3 //maxItems can be any positive integer
+        ```
 
 ## Project structure
 
@@ -43,12 +61,13 @@ FindItems             # main folder
 1. **Assumptions**
    + All items have integer prices > 0 cents. In other words, no item is free.
 
-2. **Complexity**
+1. **Complexity**
     + O(itemNum * maxPrice * maxItems).
     + itemNum is the total number of items available.
     + maxPrice is the balance of the gift card.
-    + maxItem is the desired number of items to be selected.
+    + maxItems is the desired number of items to be selected.
 
-3. **Algorithm and data structure**
-    + A modified dynamic programming solution to Knapsack problem is used. In classic Knapsack problem, there is only one constraint and thus a 2 dimensional matrix is used to track the progression. In our problem, 
-    + 
+1. **Algorithm and data structure**
+    + In classic Knapsack problem, there is only one constraint and thus a 2 dimensional matrix is used to track the unconstrained variable. Since there are 2 constrains (total price and number of items) in our problem, the traditional solution is extended to a 3 dimensional matrix, where the second and third dimension models the constraint on price and number of items, repsectively.
+    + Only the last 2 rows of the dynamic programming matrix is needed and thus kept in memory, to reduce memory consumption.
+    + The solution will work for any positive integer `maxItems` of items to be selected.
