@@ -28,7 +28,7 @@ func main() {
 	defer product.Session.Close()
 
 	//Ensure database index is unique
-	product.EnsureIndex([]string{"productID"})
+	product.EnsureIndex([]string{"messageHash"})
 	product.EnsureIndex([]string{"name"})
 
 	if err := run(); err != nil {

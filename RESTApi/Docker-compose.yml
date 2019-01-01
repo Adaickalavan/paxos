@@ -1,0 +1,45 @@
+---
+version: '3'
+services:
+
+  #Mongo database
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - dockerNet
+    volumes:
+      - "mongo-data:/data/db" #Volume location on `Host:Container` machine   
+
+  #Rest api
+  restapi:
+    container_name: restapi
+    image: restapi
+    ports:
+      - "8080:8080"
+      # When docker-compose is run in Windows 10 with Hyper-V
+      # go to "localhost:8080/" to interact with the app.
+      # When docker-compose is run using Docker Toolbox
+      # go to "192.168.99.100:8080/" to interact with the app.
+      # "192.168.99.100" is the ip address of your docker-machine.
+      # Execute `$ docker-machine ip` to get ip address of your docker-machine.
+    networks:
+      - dockerNet
+    depends_on:
+      - mongo
+    environment:
+      - LISTENING_ADDR=8080
+      - MONGO_PORT=mongo:27017  
+      - DATABASE_NAME=messages
+      - COLLECTION_NAME=messages
+
+volumes:
+  # Volume location on host machine is not specified. 
+  # Docker will create and manage these named volumes in a part of the host filesystem 
+  # which is managed by Docker (i.e., /var/lib/docker/volumes/ on Linux).
+  mongo-data: 
+networks:
+  dockerNet:
+    driver: bridge

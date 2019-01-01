@@ -3,7 +3,7 @@
 ## Instructions
 
 1. **Source code**
-    + Git clone repository into `$GOPATH/src/paxos` folder in your computer
+    + Unzip `paxos.zip` into `$GOPATH/src/paxos` folder in your computer
 
 2. **Executable**
     + To create an executable, navigate to `$GOPATH/src/paxos/FindItems` directory and execute
