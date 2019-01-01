@@ -13,15 +13,15 @@ import (
 
 func makeMuxRouter() http.Handler {
 	muxRouter := mux.NewRouter()
-	muxRouter.HandleFunc("/message", handlerGetMsgByID).Methods("GET")
-	muxRouter.HandleFunc("/message", handlerPostMsg).Methods("POST")
+	muxRouter.HandleFunc("/message", handlerGetDocByID).Methods("GET")
+	muxRouter.HandleFunc("/message", handlerPostDoc).Methods("POST")
 	return muxRouter
 }
 
 //Retrieve only document matching query
-func handlerGetMsgByID(w http.ResponseWriter, r *http.Request) {
+func handlerGetDocByID(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
-	doc, err := product.FindByValue(query.Get("doc"))
+	doc, err := product.FindByValue(query.Get("message"))
 	if err != nil {
 		handler.RespondWithError(w, http.StatusInternalServerError, err.Error())
 		return
@@ -31,10 +31,10 @@ func handlerGetMsgByID(w http.ResponseWriter, r *http.Request) {
 }
 
 //Post document to database
-func handlerPostMsg(w http.ResponseWriter, r *http.Request) {
+func handlerPostDoc(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
-	var doc document.Icecream
+	var doc document.Message
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&doc); err != nil {
 		handler.RespondWithError(w, http.StatusBadRequest, "Invalid request payload")

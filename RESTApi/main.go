@@ -13,7 +13,7 @@ import (
 var inputReader io.Reader = os.Stdin
 var outputWriter io.Writer = os.Stdout
 
-//Initialize icecream database
+//Initialize database
 var product = database.Product{}
 
 func main() {
@@ -28,8 +28,7 @@ func main() {
 	defer product.Session.Close()
 
 	//Ensure database index is unique
-	product.EnsureIndex([]string{"messageHash"})
-	product.EnsureIndex([]string{"name"})
+	product.EnsureIndex([]string{"hash"})
 
 	if err := run(); err != nil {
 		log.Fatal(err.Error())

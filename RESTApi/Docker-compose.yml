@@ -8,6 +8,9 @@ services:
     container_name: mongo
     ports:
       - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin1 #Username to access the database
+      - MONGO_INITDB_ROOT_PASSWORD=abcd #Password to access the database
     networks:
       - dockerNet
     volumes:
@@ -32,8 +35,10 @@ services:
     environment:
       - LISTENING_ADDR=8080
       - MONGO_PORT=mongo:27017  
-      - DATABASE_NAME=messages
-      - COLLECTION_NAME=messages
+      - MONGO_USERNAME=admin1
+      - MONGO_PASSWORD=abcd
+      - DATABASE_NAME=product
+      - COLLECTION_NAME=message
 
 volumes:
   # Volume location on host machine is not specified. 
