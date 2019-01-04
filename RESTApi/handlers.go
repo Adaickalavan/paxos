@@ -16,8 +16,8 @@ import (
 //makeMuxRouter makes router paths
 func makeMuxRouter() http.Handler {
 	muxRouter := mux.NewRouter()
-	muxRouter.HandleFunc("/message/{digest}", handlerGetDocByID).Methods("GET")
-	muxRouter.HandleFunc("/message", handlerPostDoc).Methods("POST")
+	muxRouter.HandleFunc("/messages/{digest}", handlerGetDocByID).Methods("GET")
+	muxRouter.HandleFunc("/messages", handlerPostDoc).Methods("POST")
 	return muxRouter
 }
 

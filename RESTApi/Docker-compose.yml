@@ -18,7 +18,7 @@ services:
 
   #Rest api
   restapi:
-    container_name: restapi
+    build: .
     image: restapi
     ports:
       - "8080:8080"
