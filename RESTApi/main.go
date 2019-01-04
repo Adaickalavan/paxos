@@ -28,7 +28,7 @@ func main() {
 	defer product.Session.Close()
 
 	//Ensure database index is unique
-	product.EnsureIndex([]string{"hash"})
+	product.EnsureIndex([]string{"digest"})
 
 	if err := run(); err != nil {
 		log.Fatal(err.Error())
@@ -38,10 +38,9 @@ func main() {
 func run() error {
 	httpAddr := os.Getenv("LISTENING_ADDR")
 	mux := makeMuxRouter()
-	// loggedRouter := handlers.LoggingHandler(outputWriter, mux) //Wrap the mux router to log all api requests. Logged requests are written to `outputWriter`
 	s := &http.Server{
 		Addr:           ":" + httpAddr,
-		Handler:        mux, //To log all api calls, replace `mux` with `loggedRouter` and uncomment `loggedRouter` at 3 lines above
+		Handler:        mux,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,

@@ -7,7 +7,7 @@ import (
 
 //RespondWithError is a HTTP reply with error message
 func RespondWithError(w http.ResponseWriter, code int, msg string) {
-	RespondWithJSON(w, code, map[string]string{"error": msg})
+	RespondWithJSON(w, code, map[string]string{"err_msg": msg})
 }
 
 //RespondWithJSON is a HTTP reply with JSON

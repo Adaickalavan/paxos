@@ -30,7 +30,7 @@ func (prod *Product) EnsureIndex(fields []string) {
 // FindByValue retrieves the Documents by its Value from Product
 func (prod *Product) FindByValue(value string) (document.Message, error) {
 	var doc document.Message
-	err := prod.c.Find(bson.M{"name": value}).One(&doc)
+	err := prod.c.Find(bson.M{"digest": value}).One(&doc)
 	return doc, err
 }
 
