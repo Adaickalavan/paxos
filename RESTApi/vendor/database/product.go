@@ -2,7 +2,7 @@ package database
 
 import (
 	"document"
-	"fmt"
+	"log"
 
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -42,7 +42,7 @@ func (prod *Product) Insert(doc document.Message) error {
 //checkError prints non-nil error and returns true. For nil error, returns false.
 func checkError(err error) bool {
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Println(err.Error())
 		return true
 	}
 	return false
