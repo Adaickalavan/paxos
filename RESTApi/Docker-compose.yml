@@ -37,7 +37,7 @@ services:
       - MONGO_PORT=mongo:27017  
       - MONGO_USERNAME=admin1
       - MONGO_PASSWORD=abcd
-      - DATABASE_NAME=product
+      - DATABASE_NAME=hashtable
       - COLLECTION_NAME=message
 
 volumes:

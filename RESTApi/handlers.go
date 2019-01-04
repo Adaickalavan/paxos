@@ -13,6 +13,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+//makeMuxRouter makes router paths
 func makeMuxRouter() http.Handler {
 	muxRouter := mux.NewRouter()
 	muxRouter.HandleFunc("/message/{digest}", handlerGetDocByID).Methods("GET")
@@ -20,7 +21,7 @@ func makeMuxRouter() http.Handler {
 	return muxRouter
 }
 
-//Retrieve only document matching query
+//handlerGetDocByID retrieves only document matching query
 func handlerGetDocByID(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	doc, err := product.FindByValue(params["digest"])
@@ -38,7 +39,7 @@ func handlerGetDocByID(w http.ResponseWriter, r *http.Request) {
 	}{Message: doc.Message})
 }
 
-//Post document to database
+//handlerPostDoc posts document to database
 func handlerPostDoc(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -61,11 +62,16 @@ func handlerPostDoc(w http.ResponseWriter, r *http.Request) {
 		handler.RespondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	handler.RespondWithJSON(w, http.StatusCreated, struct {
-		Digest string `json:"digest"`
-	}{Digest: doc.Digest})
+	handler.RespondWithJSON(
+		w, 
+		http.StatusCreated, 
+		struct {
+			Digest string `json:"digest"`
+		}{Digest: doc.Digest},
+	)
 }
 
+// encrypt encrypts messages using SHA256 and returns hexadecimal string representation of the hash
 func encrypt(message string) string {
 	hash := sha256.New()
 	hash.Write([]byte(message))

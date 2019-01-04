@@ -15,7 +15,6 @@ type Product struct {
 
 // EnsureIndex creates an index field in the collection
 func (prod *Product) EnsureIndex(fields []string) {
-	// Ensure index in MongoDB
 	index := mgo.Index{
 		Key:        fields, // Index key fields; prefix name with (-) dash for descending order
 		Unique:     true,   // Prevent two documents from having the same key
@@ -40,6 +39,7 @@ func (prod *Product) Insert(doc document.Message) error {
 	return err
 }
 
+//checkError prints non-nil error and returns true. For nil error, returns false.
 func checkError(err error) bool {
 	if err != nil {
 		fmt.Println(err.Error())

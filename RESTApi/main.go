@@ -9,16 +9,16 @@ import (
 	"time"
 )
 
-//Hooks that may be overridden for testing
+// Hooks that may be overridden for testing
 var inputReader io.Reader = os.Stdin
 var outputWriter io.Writer = os.Stdout
 
-//Initialize database
+// Initialize database
 var product = database.Product{}
 
 func main() {
 
-	//Connect to database
+	// Connect to database
 	product.Server = os.Getenv("MONGO_PORT")
 	product.DatabaseName = os.Getenv("DATABASE_NAME")
 	product.CollectionName = os.Getenv("COLLECTION_NAME")
@@ -27,7 +27,7 @@ func main() {
 	product.Session = product.Connect()
 	defer product.Session.Close()
 
-	//Ensure database index is unique
+	// Ensure database index is unique
 	product.EnsureIndex([]string{"digest"})
 
 	if err := run(); err != nil {
@@ -35,6 +35,7 @@ func main() {
 	}
 }
 
+// run runs the server
 func run() error {
 	httpAddr := os.Getenv("LISTENING_ADDR")
 	mux := makeMuxRouter()
