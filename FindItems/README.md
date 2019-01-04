@@ -3,22 +3,26 @@
 ## Instructions
 
 1. **Source code**
-    + Git clone repository into `$GOPATH/src/paxos` folder in your computer
+    + Git clone the repository into `$GOPATH/src/paxos` folder in your computer
+        ```bash
+        git clone https://github.com/Adaickalavan/paxos.git $GOPATH/src/paxos
+        ```
+        Here, git clone syntax follows the pattern: `git clone <repo> <local folder-name>`.
 
 2. **Executable**
     + To create an executable, navigate to `$GOPATH/src/paxos/FindItems` directory and execute
-        ```go
+        ```bash
         go install FindItems
         ```
 
 3. **Functional test**
     + To run complete test suite, run
-        ```go
+        ```bash
         go test -v FindItems
         ```
         Here, `-v` is the verbose command flag.
     + To run specific test, run
-        ```go
+        ```bash
         go test -v FindItems -run xxx
         ```
         Here, `xxx` is the name of test function.
@@ -26,7 +30,7 @@
 
 4. **Running**
     + Launch by executing
-        ```go
+        ```bash
         $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt maxPrice maxItems
         ```
         Here,
@@ -34,15 +38,17 @@
         + `maxPrice` refers to the balance in the gift card
         + `maxItems` refers to the desired number of items to be selected
     + Several example commands
-        ```go
-        $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt 2300 //When maxItems is omitted, it defaults to 2
+        ```bash
+        $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt 2300
         ```
-        ```go
+        + when maxItems is omitted, it defaults to 2
+        ```bash
         $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt 2100 2
         ```
-        ```go
-        $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt 2200 3 //maxItems can be any positive integer
+        ```bash
+        $GOPATH/bin/FindItems.exe $GOPATH/src/paxos/FindItems/prices.txt 2200 3 
         ```
+        + maxItems can be any positive integer
 
 ## Project structure
 
@@ -61,13 +67,13 @@ FindItems             # main folder
 1. **Assumptions**
    + All items have integer prices > 0 cents. In other words, no item is free.
 
-1. **Complexity**
+2. **Complexity**
     + O(itemNum * maxPrice * maxItems).
     + itemNum is the total number of items available.
     + maxPrice is the balance of the gift card.
     + maxItems is the desired number of items to be selected.
 
-1. **Algorithm and data structure**
+3. **Algorithm and data structure**
     + In classic Knapsack problem, there is only one constraint and thus a 2 dimensional matrix is used to track the unconstrained variable. Since there are 2 constrains (total price and number of items) in our problem, the traditional solution is extended to a 3 dimensional matrix, where the second and third dimension models the constraint on price and number of items, respectively.
     + Only the last 2 rows of the dynamic programming matrix is needed and thus kept in memory, to reduce memory consumption.
     + The solution will work for any positive integer `maxItems` of items to be selected.
