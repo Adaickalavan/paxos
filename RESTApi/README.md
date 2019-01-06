@@ -66,7 +66,7 @@ RESTApi
 |   ├── Gopkg.toml              # dependency version control file
 |   ├── handlers.go             # handlers for RESTful operation
 |   └── main.go                 # main file of Go code
-└──Docker-compose.yml           # to compose 2 containerized services
+└── Docker-compose.yml          # to compose 2 containerized services
 ```
 
 ## Notes on solution

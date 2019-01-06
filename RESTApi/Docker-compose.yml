@@ -18,7 +18,7 @@ services:
 
   #Rest api
   web:
-    build: web/.
+    build: ./web
     image: web
     ports:
       - "8080:8080"
