@@ -17,9 +17,9 @@ services:
       - "mongo-data:/data/db" #Volume location on `Host:Container` machine   
 
   #Rest api
-  restapi:
-    build: .
-    image: restapi
+  web:
+    build: web/.
+    image: web
     ports:
       - "8080:8080"
       # When docker-compose is run in Windows 10 with Hyper-V
