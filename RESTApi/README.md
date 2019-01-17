@@ -76,7 +76,7 @@ RESTApi
    + The example commands given above are to be executed in our localhost.
 
 2. **Bottleneck and scaling with users**
-   + As more users are acquired, the REST API endpoint `/messages` needs to handle large volume of requests, thus creating a bottleneck. We may handle increased load using a load-balancer such as NGINX.
+   + As more users are acquired, the REST API endpoint `/messages` needs to handle large volume of requests, thus creating a bottleneck. We may handle increased load through scaling and load-balancing, using tools such as Kubernetes and NGINX.
 
 3. **Application deployment and long-term maintainability**
    + Currently, the application is deployed using Docker containers so that each microservice is well contained, well defined, and system agnostic. Both the `web` (REST api) and `mongo` (MongoDB) microservice operates from within Docker containers.
