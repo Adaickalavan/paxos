@@ -127,8 +127,6 @@ func getItems(scanner *bufio.Scanner, maxPrice int, maxItems int) ([]item, []int
 		pathArray1, pathArray2 = pathArray2, pathArray1
 	}
 
-	fmt.Println("finished")
-
 	// Backtrack to get chosen items' indices
 	indices, err := backtrack(itemList, pathArray1, maxItems)
 
