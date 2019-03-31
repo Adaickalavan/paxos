@@ -127,6 +127,8 @@ func getItems(scanner *bufio.Scanner, maxPrice int, maxItems int) ([]item, []int
 		pathArray1, pathArray2 = pathArray2, pathArray1
 	}
 
+	fmt.Println("finished")
+
 	// Backtrack to get chosen items' indices
 	indices, err := backtrack(itemList, pathArray1, maxItems)
 
@@ -155,10 +157,10 @@ func backtrack(itemList []item, pathArray [][]path, maxItems int) ([]int, error)
 	for itemCount := maxItems; itemCount > 0; itemCount-- {
 		curPath := pathArray[col][itemCount]
 		indices = append(indices, curPath.itemPicked)
-		if col <= 0 {
+		col = curPath.total - itemList[curPath.itemPicked].price
+		if col < 0 {
 			return indices, errors.New("Not possible")
 		}
-		col = curPath.total - itemList[curPath.itemPicked].price
 	}
 	if col != 0 {
 		return indices, errors.New("Not possible")
